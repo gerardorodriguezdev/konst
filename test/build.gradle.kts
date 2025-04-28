@@ -4,7 +4,6 @@ plugins {
 
 kotlin {
     jvm()
-    // add more targets if you need to.
 }
 
 dependencies {
