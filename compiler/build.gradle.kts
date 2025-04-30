@@ -4,4 +4,5 @@ plugins {
 
 dependencies {
     implementation(libs.kotlin.compiler.embeddable)
+    implementation(project(":core"))
 }
