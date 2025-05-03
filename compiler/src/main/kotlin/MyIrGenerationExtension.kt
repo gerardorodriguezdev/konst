@@ -1,4 +1,4 @@
-import core.ConstExp
+import core.Log
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.common.lower.createIrBuilder
@@ -30,7 +30,7 @@ class MyIrGenerationExtension : IrGenerationExtension {
     }
 
     private fun IrPluginContext.log(message: Any) {
-        messageCollector.report(CompilerMessageSeverity.INFO, ">>>" + message)
+        messageCollector.report(CompilerMessageSeverity.INFO, ">>>$message")
     }
 }
 
@@ -41,7 +41,7 @@ private class LogsTransformer(private val pluginContext: IrPluginContext) : IrEl
     ).first { it.owner.valueParameters.singleOrNull()?.type == pluginContext.irBuiltIns.anyNType }
 
     override fun visitSimpleFunction(declaration: IrSimpleFunction): IrStatement {
-        val hasAnnotation = declaration.annotations.hasAnnotation(FqName(ConstExp::class.qualifiedName!!))
+        val hasAnnotation = declaration.annotations.hasAnnotation(FqName(Log::class.qualifiedName!!))
         if (hasAnnotation) {
             val result = transformFunction(declaration)
             if (result != null) return result

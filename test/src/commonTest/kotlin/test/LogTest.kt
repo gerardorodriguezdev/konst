@@ -1,18 +1,16 @@
 package test
 
-import core.ConstExp
+import core.Log
 import kotlin.test.Test
 
-@ConstExp
+@Log
 fun myFunction(value: Int): Int {
     return value + 1
 }
 
-class ConstExpTest {
+class LogTest {
     @Test
     fun firstTest() {
-        println(
-            myFunction(1)
-        )
+        myFunction(1)
     }
 }
